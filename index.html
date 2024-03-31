@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Consent</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        animation: fadeIn 0.5s;
+    }
+    .popup-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -70%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        animation: slideIn 0.5s;
+    }
+    .fadeOut {
+        animation: fadeOut 0.5s;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes slideIn {
+        from {
+            transform: translate(-50%, -70%);
+        }
+        to {
+            transform: translate(-50%, -50%);
+        }
+    }
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content" id="popupContent">
+        <h2>Cookie Consent</h2>
+        <p>This website uses cookies to ensure you get the best experience on our website.</p>
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
+</div>
+
+<h1>Welcome to Our Website</h1>
+<p>This is the content of our website.</p>
+
+<script>
+    function showPopup() {
+        var popupOverlay = document.getElementById('popupOverlay');
+        popupOverlay.style.display = 'block';
+    }
+
+    function acceptCookies() {
+        var popupContent = document.getElementById('popupContent');
+        popupContent.classList.add('fadeOut');
+        setTimeout(function() {
+            var popupOverlay = document.getElementById('popupOverlay');
+            popupOverlay.style.display = 'none';
+        }, 500);
+    }
+
+    window.onload = function() {
+        showPopup();
+    };
+</script>
+
+</body>
+</html>
