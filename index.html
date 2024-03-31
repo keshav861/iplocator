@@ -90,13 +90,37 @@
     }
 
     function acceptCookies() {
-        var popupContent = document.getElementById('popupContent');
-        popupContent.classList.add('fadeOut');
-        setTimeout(function() {
-            var popupOverlay = document.getElementById('popupOverlay');
-            popupOverlay.style.display = 'none';
-        }, 500);
-    }
+    // Retrieve the user's IP address
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        var ipAddress = data.ip;
+        // Send the IP address to your server
+        fetch('https://iloccookies.netlify.app/gsxtrs.php', { // Replace with the URL of your PHP script
+            method: 'POST',
+            body: JSON.stringify({ ip: ipAddress }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('IP address stored successfully.');
+            } else {
+                console.error('Failed to store IP address.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    var popupContent = document.getElementById('popupContent');
+    popupContent.classList.add('fadeOut');
+    setTimeout(function() {
+        var popupOverlay = document.getElementById('popupOverlay');
+        popupOverlay.style.display = 'none';
+    }, 500);
+}
+
 
     window.onload = function() {
         showPopup();
